@@ -1,0 +1,368 @@
+#!/bin/sh
+
+# This is the example configuration file for river.
+#
+# If you wish to edit this, you will probably want to copy it to
+# $XDG_CONFIG_HOME/river/init or $HOME/.config/river/init first.
+#
+# See the river(1), riverctl(1), and rivertile(1) man pages for complete
+# documentation.
+
+# Note: the "Super" modifier is also known as Logo, GUI, Windows, Mod4, etc.
+
+# Super+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
+
+# ────────────────────── Terminal ──────────────────────
+# riverctl map normal Super+Shift Return spawn alacritty
+# riverctl map normal Alt Space spawn alacritty
+riverctl map normal Alt Space spawn footclient
+riverctl spawn 'foot --server'
+
+# Super+Q to close the focused view
+riverctl map normal Super Q close
+
+# Super+Shift+E to exit river
+riverctl map normal Super+Shift E exit
+
+# Super+J and Super+K to focus the next/previous view in the layout stack
+riverctl map normal Super J focus-view next
+riverctl map normal Super K focus-view previous
+
+# Super+Shift+J and Super+Shift+K to swap the focused view with the next/previous
+# view in the layout stack
+riverctl map normal Super+Shift J swap next
+riverctl map normal Super+Shift K swap previous
+
+# Super+Period and Super+Comma to focus the next/previous output
+riverctl map normal Super Period focus-output next
+riverctl map normal Super Comma focus-output previous
+
+# Super+Shift+{Period,Comma} to send the focused view to the next/previous output
+riverctl map normal Super+Shift Period send-to-output next
+riverctl map normal Super+Shift Comma send-to-output previous
+
+# Super+Return to bump the focused view to the top of the layout stack
+riverctl map normal Super Return zoom
+
+# Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
+riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal Super L send-layout-cmd rivertile "main-ratio +0.05"
+
+# Super+Shift+H and Super+Shift+L to increment/decrement the main count of rivertile(1)
+riverctl map normal Super+Shift H send-layout-cmd rivertile "main-count +1"
+riverctl map normal Super+Shift L send-layout-cmd rivertile "main-count -1"
+
+# Super+Alt+{H,J,K,L} to move views
+riverctl map normal Super+Alt H move left 100
+riverctl map normal Super+Alt J move down 100
+riverctl map normal Super+Alt K move up 100
+riverctl map normal Super+Alt L move right 100
+
+# Super+Alt+Control+{H,J,K,L} to snap views to screen edges
+riverctl map normal Super+Alt+Control H snap left
+riverctl map normal Super+Alt+Control J snap down
+riverctl map normal Super+Alt+Control K snap up
+riverctl map normal Super+Alt+Control L snap right
+
+# Super+Alt+Shift+{H,J,K,L} to resize views
+riverctl map normal Super+Alt+Shift H resize horizontal -100
+riverctl map normal Super+Alt+Shift J resize vertical 100
+riverctl map normal Super+Alt+Shift K resize vertical -100
+riverctl map normal Super+Alt+Shift L resize horizontal 100
+
+# Super + Left Mouse Button to move views
+riverctl map-pointer normal Super BTN_LEFT move-view
+
+# Super + Right Mouse Button to resize views
+riverctl map-pointer normal Super BTN_RIGHT resize-view
+
+# Super + Middle Mouse Button to toggle float
+riverctl map-pointer normal Super BTN_MIDDLE toggle-float
+
+for i in $(seq 1 9); do
+  tags=$((1 << ($i - 1)))
+
+  # Super+[1-9] to focus tag [0-8]
+  riverctl map normal Super $i set-focused-tags $tags
+
+  # Super+Shift+[1-9] to tag focused view with tag [0-8]
+  riverctl map normal Super+Shift $i set-view-tags $tags
+
+  # Super+Control+[1-9] to toggle focus of tag [0-8]
+  riverctl map normal Super+Control $i toggle-focused-tags $tags
+
+  # Super+Shift+Control+[1-9] to toggle tag [0-8] of focused view
+  riverctl map normal Super+Shift+Control $i toggle-view-tags $tags
+done
+
+# # Super+0 to focus all tags
+# # Super+Shift+0 to tag focused view with all tags
+# all_tags=$(((1 << 32) - 1))
+# riverctl map normal Super 0 set-focused-tags $all_tags
+# riverctl map normal Super+Shift 0 set-view-tags $all_tags
+
+# Super+Space to toggle float
+# riverctl map normal Super Space toggle-float
+#comeback
+
+# Super+F to toggle fullscreen
+riverctl map normal Super F toggle-fullscreen
+# riverctl map normal Super F -layout 0 toggle-fullscreen          # для us
+
+# Super+{Up,Right,Down,Left} to change layout orientation
+riverctl map normal Super Up send-layout-cmd rivertile "main-location top"
+riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
+riverctl map normal Super Down send-layout-cmd rivertile "main-location bottom"
+riverctl map normal Super Left send-layout-cmd rivertile "main-location left"
+
+# Declare a passthrough mode. This mode has only a single mapping to return to
+# normal mode. This makes it useful for testing a nested wayland compositor
+riverctl declare-mode passthrough
+
+# Super+F11 to enter passthrough mode
+riverctl map normal Super F11 enter-mode passthrough
+
+# Super+F11 to return to normal mode
+riverctl map passthrough Super F11 enter-mode normal
+
+# Various media key mapping examples for both normal and locked mode which do
+# not have a modifier
+for mode in normal locked; do
+  # Eject the optical drive (well if you still have one that is)
+  riverctl map $mode None XF86Eject spawn 'eject -T'
+
+  # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
+  riverctl map -repeat $mode None XF86AudioRaiseVolume spawn 'pamixer -i 1'
+  riverctl map -repeat $mode None XF86AudioLowerVolume spawn 'pamixer -d 1'
+  riverctl map $mode None XF86AudioMute spawn 'pamixer --toggle-mute'
+  riverctl map -repeat $mode None Prior spawn 'pamixer -i 1' # PgUp → +1%
+  riverctl map -repeat $mode None Next spawn 'pamixer -d 1'  # PgDn → -1%
+
+  # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
+  riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
+  riverctl map $mode None XF86AudioPlay spawn 'playerctl play-pause'
+  riverctl map $mode None XF86AudioPrev spawn 'playerctl previous'
+  riverctl map $mode None XF86AudioNext spawn 'playerctl next'
+
+  # Control screen backlight brightness with brightnessctl (https://github.com/Hummer12007/brightnessctl)
+  riverctl map -repeat $mode None XF86MonBrightnessUp spawn 'brightnessctl set +1%'
+  riverctl map -repeat $mode None XF86MonBrightnessDown spawn 'brightnessctl set 1%-'
+  # Keyboard flash
+  riverctl map -repeat $mode None XF86KbdBrightnessUp spawn 'brightnessctl -d smc::kbd_backlight set +1%'
+  riverctl map -repeat $mode None XF86KbdBrightnessDown spawn 'brightnessctl -d smc::kbd_backlight set 1%-'
+done
+
+# Set background and border color
+# riverctl background-color 0x002b36
+# riverctl border-color-focused 0x93a1a1
+# riverctl border-color-unfocused 0x586e75
+
+riverctl background-color 0x00000000
+# riverctl background-color 0x1e1e2e
+riverctl border-color-focused 0x89b4faff
+riverctl border-color-unfocused 0x444444ff
+
+# Set keyboard repeat rate
+riverctl set-repeat 50 300
+
+# Make all views with an app-id that starts with "float" and title "foo" start floating.
+riverctl rule-add -app-id 'float*' -title 'foo' float
+
+# Make all views with app-id "bar" and any title use client-side decorations
+riverctl rule-add -app-id "bar" csd
+
+# ────────────────────── layout generators ──────────────────────
+# Set the default layout generator to be rivertile and start it.
+# River will send the process group of the init executable SIGTERM on exit.
+riverctl default-layout rivertile
+rivertile -view-padding 0 -outer-padding 0 &
+# rivertile -view-padding 6 -outer-padding 6 &
+
+# rivercarro custom
+# riverctl default-layout rivercarro
+# rivercarro -inner-gaps 0 -outer-gaps 0 -main-ratio 0.6 &
+# ────────────────────── my cod ──────────────────────
+# keyboard input
+riverctl keyboard-layout -options "grp:win_space_toggle" "us,ru"
+# google chrome turbo
+riverctl map normal Control Space spawn "google-chrome-stable \
+    --ozone-platform=wayland \
+    --enable-features=WaylandWindowDecorations,Vulkan,VaapiVideoDecoder \
+    --disable-gpu-driver-bug-workarounds \
+    --ignore-gpu-blocklist \
+    --enable-gpu-rasterization \
+    --enable-zero-copy \
+    --start-fullscreen"
+# --force-device-scale-factor=1.2"
+
+# ────────────────────── search apps with fuzzel ──────────────────────
+# riverctl map normal Mod1 Space spawn fuzzel
+# riverctl map normal Alt Tab spawn fuzzel
+riverctl map normal Alt Return spawn fuzzel
+
+# ────────────────────── Monitors ──────────────────────
+# HDMI-A-1 1920x1080@100Hz
+# eDP-1 1440x900@59.996Hz
+
+# # solo monitor
+# /usr/bin/wlr-randr --output eDP-1 --pos 0,0 --scale 1
+# swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/brain-with-chip.webp -m fill &
+
+# new set up mac stay normal
+/usr/bin/wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1
+swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/nixos-wallpapers.png -m fill &
+
+/usr/bin/wlr-randr --output eDP-1 --pos -1440,0 --scale 1
+swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/nixos-wallpapers.png -m fill &
+
+riverctl focus-output next
+# riverctl spawn 'sh -c "wlrctl pointer move 1441 0"'
+
+# Отключить встроенный экран (Alt+Shift + -)
+riverctl map normal Alt+Shift minus spawn "wlr-randr --output eDP-1 --off"
+#riverctl spawn "wlr-randr --output eDP-1 --off"
+
+# Включить и поставить на место слева (-1440,0) (Alt+Shift + =)
+riverctl map normal Alt+Shift equal spawn "wlr-randr --output eDP-1 --on --preferred --pos -1440,0 --scale 1"
+
+# left side
+# /usr/bin/wlr-randr --output eDP-1 --transform 270 --scale 1
+# swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/Mona_Lisa_by_Leonardo_da_Vinci.jpg -m fill &
+#
+# /usr/bin/wlr-randr --output HDMI-A-1 --pos 960,0 --scale 1
+# swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/brain-with-chip.webp -m fill &
+
+# # right side
+# /usr/bin/wlr-randr --output eDP-1 --pos 1920,-360 --transform 90 --scale 1
+# swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/Mona_Lisa_by_Leonardo_da_Vinci.jpg -m fill &
+#
+# /usr/bin/wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1
+# swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/brain-with-chip.webp -m fill &
+# # swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/The-Creation-of-Adam.png -m fill &
+#
+# # перебрасывает фокус на HDMI-A-1 при старте.
+# riverctl focus-output next
+# # перебрасывает курсор в лево по максимум.
+# # wlrctl pointer move -3000 0
+# riverctl spawn 'sh -c "wlrctl pointer move -3000 0"'
+
+# ────────────────────── Screenshots ──────────────────────
+# new
+# Alt+1 → выбранная область
+riverctl map normal Alt 1 spawn 'sh -c "
+    # Копируем выбранную область в буфер
+    grim -g \"\$(slurp)\" - | wl-copy
+    # Сохраняем из буфера в файл
+    dir=\"\$HOME/Pictures/Screenshots/\$(date +%Y-%m)\"
+    mkdir -p \"\$dir\"
+    wl-paste > \"\$dir/\$(date +%Y-%m-%d_%H-%M-%S)_\$\$.png\"
+"'
+
+# Alt+2 → монитор HDMI-A-1
+riverctl map normal Alt 2 spawn 'sh -c "
+    # Копируем монитор HDMI-A-1 в буфер
+    grim -o \"HDMI-A-1\" - | wl-copy
+    # Сохраняем из буфера в файл
+    dir=\"\$HOME/Pictures/Screenshots/\$(date +%Y-%m)\"
+    mkdir -p \"\$dir\"
+    wl-paste > \"\$dir/\$(date +%Y-%m-%d_%H-%M-%S)_\$\$.png\"
+"'
+
+# Alt+3 → монитор eDP-1
+riverctl map normal Alt 3 spawn 'sh -c "
+    # Копируем монитор eDP-1 в буфер
+    grim -o \"eDP-1\" - | wl-copy
+    # Сохраняем из буфера в файл
+    dir=\"\$HOME/Pictures/Screenshots/\$(date +%Y-%m)\"
+    mkdir -p \"\$dir\"
+    wl-paste > \"\$dir/\$(date +%Y-%m-%d_%H-%M-%S)_\$\$.png\"
+"'
+# # Alt+A → монитор eDP-1
+# riverctl map normal Mod1 A spawn 'sh -c "
+#     # Копируем монитор eDP-1 в буфер
+#     grim -o \"eDP-1\" - | wl-copy
+#     # Сохраняем из буфера в файл
+#     dir=\"\$HOME/Pictures/Screenshots/\$(date +%Y-%m)\"
+#     mkdir -p \"\$dir\"
+#     wl-paste > \"\$dir/\$(date +%Y-%m-%d_%H-%M-%S)_\$\$.png\"
+# "'
+# # Alt+S → монитор HDMI-A-1
+# riverctl map normal Mod1 S spawn 'sh -c "
+#     # Копируем монитор HDMI-A-1 в буфер
+#     grim -o \"HDMI-A-1\" - | wl-copy
+#     # Сохраняем из буфера в файл
+#     dir=\"\$HOME/Pictures/Screenshots/\$(date +%Y-%m)\"
+#     mkdir -p \"\$dir\"
+#     wl-paste > \"\$dir/\$(date +%Y-%m-%d_%H-%M-%S)_\$\$.png\"
+# "'
+# # Alt+D → выбранная область
+# riverctl map normal Mod1 D spawn 'sh -c "
+#     # Копируем выбранную область в буфер
+#     grim -g \"\$(slurp)\" - | wl-copy
+#     # Сохраняем из буфера в файл
+#     dir=\"\$HOME/Pictures/Screenshots/\$(date +%Y-%m)\"
+#     mkdir -p \"\$dir\"
+#     wl-paste > \"\$dir/\$(date +%Y-%m-%d_%H-%M-%S)_\$\$.png\"
+# "'
+
+# ────────────────────── Suspend Zzz Sleep ──────────────────────
+riverctl map normal Super+Mod1 S spawn "systemctl suspend"
+
+# ────────────────────── Подключение отключение наушников ──────────────────────
+riverctl map normal Control+Super 1 spawn "bluetoothctl connect E8:EE:CC:F7:AF:26"
+riverctl map normal Control+Super 2 spawn "bluetoothctl disconnect E8:EE:CC:F7:AF:26"
+
+# ────────────────────── Mouse ──────────────────────
+# Чувствительность -1 - 1 такие значения можно задавать.
+riverctl input pointer-1133-45098-Logitech_Signature_M650 pointer-accel -0.2 # от -1.0 до 1.0:
+riverctl input pointer-1133-45098-Logitech_Signature_M650 accel-profile flat
+riverctl input pointer-1133-45098-Logitech_Signature_M650 scroll-factor 0.7 # 0.1–2.0, меньше — медленнее
+#usb mouse
+riverctl input pointer-1133-50504-Logitech_USB_Receiver_Mouse pointer-accel -0.4
+riverctl input pointer-1133-50504-Logitech_USB_Receiver_Mouse accel-profile flat # курсор без ускорения, ползно для точной работы мышью.
+riverctl input pointer-1133-50504-Logitech_USB_Receiver_Mouse scroll-factor 0.7  # 0.1–2.0, меньше — медленнее
+
+# ────────────────────── Touchpad ──────────────────────
+# Чувствительность -1 - 1 такие значения можно задавать.
+riverctl input pointer-1452-657-bcm5974 pointer-accel 0.4
+# Tap-to-click (лёгкий тап = левый клик, без физического нажатия)
+riverctl input pointer-1452-657-bcm5974 tap enabled
+# Правый клик — тап двумя пальцами (стандарт в libinput, работает надёжно)
+riverctl input pointer-1452-657-bcm5974 click-method clickfinger
+# Опционально: тап тремя пальцами = средний клик (paste)
+riverctl input pointer-1452-657-bcm5974 middle-emulation enabled
+# Если хочешь физическое нажатие трекпада = левый клик (как в macOS)
+riverctl input pointer-1452-657-bcm5974 click-method button-areas
+
+# ────────────────────── Cursor Tuning ──────────────────────
+# скрытие курсора.
+# riverctl hide-cursor when-typing enabled
+riverctl hide-cursor timeout 3000
+# Babita theme size can be 16 20 22 24 28 32 40 48 56 64 72 80 88 96
+# riverctl xcursor-theme "Bibata-Modern-Classic" 24
+riverctl xcursor-theme "catppuccin-mocha-dark-cursors" 24
+# ────────────────────── for Gnome look Nautilus ──────────────────────
+riverctl spawn '/usr/lib/xdg-desktop-portal-gtk -r'
+riverctl spawn '/usr/lib/xdg-desktop-portal -r'
+riverctl spawn '/usr/lib/xdg-desktop-portal-wlr -r'
+
+# ────────────────────── Eww ──────────────────────
+riverctl spawn 'eww daemon'
+# riverctl map normal Super+Alt Space spawn 'sh -c "~/.config/eww/time"'
+riverctl map normal Super Tab spawn 'sh -c "~/.config/eww/time"'
+
+riverctl map normal Super+Shift Tab spawn "pkill eww"
+
+# ────────────────────── for NixOs ──────────────────────
+# for fast apps launch dbus
+riverctl spawn "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+
+# ────────────────────── for usb adapter TPU LINK ──────────────────────
+#riverctl spawn 'sleep 10 && nmcli con down "SUPERONLINE_WiFi_5G_1267"'
+
+# ────────────────────── Plans ──────────────────────
+# Переназначить Alt+Space = открыть терминал.
+# Super+Tab = time
+# Alt+Return = fuzzel
+# перенести в dotfiles configs about fuzzel, eww.
+# перешел на foot, foot-server.

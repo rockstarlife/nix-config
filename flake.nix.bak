@@ -1,0 +1,62 @@
+{
+  description = "minimal tty";
+
+inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";  # ← важно! чтобы не дублировать nixpkgs
+  };
+};
+
+outputs = { self, nixpkgs, unstable, home-manager, ... } @ inputs: let
+
+    system = "x86_64-linux"; # прописываем архитектуру один раз.
+
+    pkgs = import nixpkgs { # стабильная ветка суем ее в переменную pkgs.
+      inherit system; # наша архитектура в переменной.
+      config.allowUnfree = true; # даем доступ к проприетарным пакетам.
+    };
+
+    unstablePkgs = import unstable { # не стабильная ветка суем ее в переменную unstablePkgs.
+      inherit system; # наша архитектура в переменной.
+      config.allowUnfree = true; # доступ к проприетарным пакетам типо google-chrome
+    };
+
+  in {
+    nixosConfigurations.nixmac = nixpkgs.lib.nixosSystem { # здесь мы начинаем строить систему. 
+      inherit system; # передаём архитектуру в nixosSystem
+
+      specialArgs = { inherit unstablePkgs; };   # делаем unstablePkgs доступным во всех модулях как аргумент
+
+      modules = [
+        ./hosts/nixmac/default.nix # основной файл конфигурации машины
+
+
+        home-manager.nixosModules.home-manager
+
+        {
+          # ← вот это обязательно для всей системы
+          nixpkgs.config.allowUnfree = true;
+
+          # базовые настройки home-manager (минимально)
+          home-manager.useGlobalPkgs     = true;     # берёт pkgs из системы (stable)
+          home-manager.useUserPackages   = true;     # ставит пакеты в ~/.nix-profile
+          home-manager.users.neo = {
+          home.stateVersion = "25.11";             # обязательно, как system.stateVersion
+
+          # здесь пока пусто, но дальше добавишь
+          # programs.fish.enable = true;
+          # home.packages = [ pkgs.ripgrep pkgs.fd ];
+        };
+
+        # если хочешь unstable-пакеты в home-manager — передаём их
+        home-manager.extraSpecialArgs = { inherit unstablePkgs; };
+
+        }
+      ];
+    };
+  };
+}
