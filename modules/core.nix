@@ -39,6 +39,7 @@ services.displayManager.sddm.wayland.enable = true;
     users = [ "neo" ];
     keepEnv = true;
     persist = true;
+    # as = "neo";  # это заставит doas работать от имени neo, а не root
   }];
 
 # ────────────────────── pkgs ──────────────────────
