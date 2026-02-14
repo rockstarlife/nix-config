@@ -6,7 +6,7 @@
   boot.blacklistedKernelModules = [ "b43" "b43legacy" "ssb" "bcma" "brcmfmac" "brcmsmac" "brcm80211" ];
 
   nixpkgs.config.permittedInsecurePackages = [
-    "broadcom-sta-6.30.223.271-59-6.18.7"  # если ругается — подставь точное имя из ошибки
+    "broadcom-sta-6.30.223.271-59-6.18.8"  # если ругается — подставь точное имя из ошибки
   ];
 
 # ────────────────────── bluetooth ──────────────────────

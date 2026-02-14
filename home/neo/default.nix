@@ -9,6 +9,7 @@
 
   imports = [
     ./cli/btop.nix
+    # ./cli/cava.nix
     ./gui/foot.nix
   ];
 

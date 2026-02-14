@@ -2,8 +2,8 @@
 
 {
 # ────────────────────── kernel ──────────────────────
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-
+  # boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest; # может быть более быстрым.
 # ────────────────────── ZRAM ──────────────────────
   zramSwap.enable = true;
   zramSwap.memoryPercent = 50;
