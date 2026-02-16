@@ -160,7 +160,12 @@ done
 riverctl background-color 0x00000000
 # riverctl background-color 0x1e1e2e
 riverctl border-color-focused 0x89b4faff
+
+riverctl border-color-focused 0x94e2d5ff # catppuccin-mocha-green
 riverctl border-color-unfocused 0x444444ff
+
+# riverctl border-color-focused 0x74c7ecff
+# riverctl border-color-focused 0x89dcebff
 
 # Set keyboard repeat rate
 riverctl set-repeat 50 300
@@ -195,6 +200,17 @@ riverctl map normal Control Space spawn "google-chrome-stable \
     --start-fullscreen"
 # --force-device-scale-factor=1.2"
 
+# for ungoogled chromium
+riverctl map normal Control+Shift Space spawn "chromium \
+    --ozone-platform=wayland \
+    --enable-features=WaylandWindowDecorations,Vulkan,VaapiVideoDecoder,VaapiVideoDecodeLinuxGL,VaapiIgnoreDriverChecks \
+    --use-gl=angle \
+    --use-angle=vulkan \
+    --enable-gpu-rasterization \
+    --enable-zero-copy \
+    --ignore-gpu-blocklist \
+    --start-fullscreen"
+
 # ────────────────────── search apps with fuzzel ──────────────────────
 # riverctl map normal Mod1 Space spawn fuzzel
 # riverctl map normal Alt Tab spawn fuzzel
@@ -209,10 +225,15 @@ riverctl map normal Alt Return spawn fuzzel
 # swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/brain-with-chip.webp -m fill &
 
 # new set up mac stay normal
-/usr/bin/wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1
+# /usr/bin/wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1
+wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1 && wlr-randr --output eDP-1 --pos -1440,0 --scale 1
+# no mause bag off on eDp-1.
+
+# wlr-randr --output HDMI-A-1 --preferred --pos 0,0 --scale 1
 swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/nixos-wallpapers.png -m fill &
 
-/usr/bin/wlr-randr --output eDP-1 --pos -1440,0 --scale 1
+# /usr/bin/wlr-randr --output eDP-1 --pos -1440,0 --scale 1
+# wlr-randr --output eDP-1 --pos -1440,0 --scale 1
 swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/nixos-wallpapers.png -m fill &
 
 riverctl focus-output next
@@ -222,6 +243,8 @@ riverctl focus-output next
 riverctl map normal Alt+Shift minus spawn "wlr-randr --output eDP-1 --off"
 #riverctl spawn "wlr-randr --output eDP-1 --off"
 
+#wlr-randr --output HDMI-A-1  --pos 0,0 --scale 1 && wlr-randr --output eDP-1 --pos -1440,0 --scale 1
+# wlr-randr --output HDMI-A-1 --on --preferred --pos 0,0 --scale 1 && wlr-randr --output eDP-1 --on --pos -1440,0 --scale 1
 # Включить и поставить на место слева (-1440,0) (Alt+Shift + =)
 riverctl map normal Alt+Shift equal spawn "wlr-randr --output eDP-1 --on --preferred --pos -1440,0 --scale 1"
 
@@ -338,6 +361,7 @@ riverctl input pointer-1452-657-bcm5974 click-method button-areas
 # скрытие курсора.
 # riverctl hide-cursor when-typing enabled
 riverctl hide-cursor timeout 3000
+# riverctl hide-cursor timeout 10000
 # Babita theme size can be 16 20 22 24 28 32 40 48 56 64 72 80 88 96
 # riverctl xcursor-theme "Bibata-Modern-Classic" 24
 riverctl xcursor-theme "catppuccin-mocha-dark-cursors" 24
