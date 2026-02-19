@@ -135,8 +135,10 @@ for mode in normal locked; do
   riverctl map -repeat $mode None XF86AudioRaiseVolume spawn 'pamixer -i 1'
   riverctl map -repeat $mode None XF86AudioLowerVolume spawn 'pamixer -d 1'
   riverctl map $mode None XF86AudioMute spawn 'pamixer --toggle-mute'
+
   riverctl map -repeat $mode None Prior spawn 'pamixer -i 1' # PgUp → +1%
   riverctl map -repeat $mode None Next spawn 'pamixer -d 1'  # PgDn → -1%
+  riverctl map normal Mod1 Next spawn 'pamixer --toggle-mute'
 
   # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
   riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
@@ -227,7 +229,9 @@ riverctl map normal Alt Return spawn fuzzel
 # new set up mac stay normal
 # /usr/bin/wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1
 wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1 && wlr-randr --output eDP-1 --pos -1440,0 --scale 1
-# no mause bag off on eDp-1.
+
+# если мышь лагает обнулить экраны.
+riverctl map normal Alt+Shift 0 spawn "wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1 && wlr-randr --output eDP-1 --pos -1440,0 --scale 1"
 
 # wlr-randr --output HDMI-A-1 --preferred --pos 0,0 --scale 1
 swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/nixos-wallpapers.png -m fill &

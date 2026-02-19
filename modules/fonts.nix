@@ -1,11 +1,21 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstablePkgs, ... }:
 
 {
-  fonts.packages = with pkgs; [
+  # fonts.packages = with pkgs; [
+  #   # inter # open source clone of San Francisco from Apple.
+  #   # nerd-fonts.jetbrains-mono
+  #   # noto-fonts # резервный самый глобальный шрифт, подходит для всего.
+  # ];
+
+
+  fonts.packages = with unstablePkgs; [
     inter # open source clone of San Francisco from Apple.
+    geist-font # inter 2.0
     nerd-fonts.jetbrains-mono
     noto-fonts # резервный самый глобальный шрифт, подходит для всего.
+    tex-gyre.termes # time new romans coppy 1:1.
   ];
+
 
 #make by myself
 fonts.fontconfig = {
@@ -15,8 +25,8 @@ fonts.fontconfig = {
     style = "slight";   # или "none" для ещё ближе к macOS
   };
   defaultFonts = {
-    serif     = [ "Inter" ];
-    sansSerif = [ "Inter" ];
+    serif     = [ "Geist" "Inter" ]; # Inter
+    sansSerif = [ "Geist" "Inter" ]; # Inter
     monospace = [ "JetBrainsMono Nerd Font Mono" "JetBrains Mono" ];
     };
 
