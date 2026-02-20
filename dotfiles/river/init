@@ -228,10 +228,10 @@ riverctl map normal Alt Return spawn fuzzel
 
 # new set up mac stay normal
 # /usr/bin/wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1
-wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1 && wlr-randr --output eDP-1 --pos -1440,0 --scale 1
+wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 && wlr-randr --output eDP-1 --pos -1440,0 --scale 1
 
 # если мышь лагает обнулить экраны.
-riverctl map normal Alt+Shift 0 spawn "wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1 && wlr-randr --output eDP-1 --pos -1440,0 --scale 1"
+riverctl map normal Alt+Shift 0 spawn "wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 && wlr-randr --output eDP-1 --pos -1440,0 --scale 1"
 
 # wlr-randr --output HDMI-A-1 --preferred --pos 0,0 --scale 1
 swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/nixos-wallpapers.png -m fill &
