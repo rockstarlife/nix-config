@@ -1,68 +1,18 @@
 { config, pkgs, unstablePkgs, ... }:
 
 {
-  # fonts.packages = with pkgs; [
-  #   # inter # open source clone of San Francisco from Apple.
-  #   # nerd-fonts.jetbrains-mono
-  #   # noto-fonts # резервный самый глобальный шрифт, подходит для всего.
-  # ];
-
 
   fonts.packages = with unstablePkgs; [
-    inter # open source clone of San Francisco from Apple.
     geist-font # inter 2.0
+    inter # open source clone of San Francisco from Apple.
     nerd-fonts.jetbrains-mono
     noto-fonts # резервный самый глобальный шрифт, подходит для всего.
+    noto-fonts-cjk-sans # for asia lang.
+    noto-fonts-cjk-serif
     tex-gyre.termes # time new romans coppy 1:1.
+    charis # for IPA
   ];
 
-
-# #make by myself
-# fonts.fontconfig = {
-#   antialias = true;
-#   hinting = {
-#     enable = true;          # включаем, но слабый
-#     style = "slight";   # или "none" для ещё ближе к macOS
-#   };
-#   defaultFonts = {
-#     serif     = [ "Geist" "Inter" ]; # Inter
-#     sansSerif = [ "Geist" "Inter" ]; # Inter
-#     monospace = [ "JetBrainsMono Nerd Font Mono" "JetBrains Mono" ];
-#     };
-#
-#   localConf = ''
-#     <?xml version='1.0'?>
-#     <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
-#     <fontconfig>
-#
-#       <!-- macOS-подобный: слабый хинтинг + legacy фильтр для мягкости -->
-#       <match target="font">
-#         <edit name="antialias" mode="assign"><bool>true</bool></edit>
-#         <edit name="hinting" mode="assign"><bool>true</bool></edit>
-#         <edit name="hintstyle" mode="assign"><const>hintslight</const></edit>
-#         <edit name="rgba" mode="assign"><const>rgb</const></edit>
-#         <edit name="lcdfilter" mode="assign"><const>lcdlegacy</const></edit>  <!-- или lcdlight для ещё мягче -->
-#       </match>
-#
-#       <!-- Отключаем bytecode hinting где возможно (ближе к macOS) -->
-#       <match target="font">
-#         <test name="embeddedbitmap" compare="contains"><bool>false</bool></test>
-#         <edit name="autohint" mode="assign"><bool>false</bool></edit>  <!-- выключаем автогинт -->
-#       </match>
-#
-#       <!-- Для Chrome часто помогает -->
-#       <alias>
-#         <family>sans-serif</family>
-#         <prefer>
-#           <family>Helvetica Neue</family>
-#           <family>Arial</family>
-#           <family>Noto Sans</family>
-#         </prefer>
-#       </alias>
-#
-#     </fontconfig>
-#   '';
-# };
 
 fonts.fontconfig = {
   antialias = true;
@@ -72,9 +22,9 @@ fonts.fontconfig = {
   };
 
   defaultFonts = {
-    serif     = [ "Geist" "Inter" "Noto Serif" ];
-    sansSerif = [ "Geist" "Inter" "Noto Sans" ];
-    monospace = [ "JetBrainsMono Nerd Font Mono" "JetBrains Mono" "Noto Sans Mono" ];
+    serif     = [ "Geist" "Inter" "Noto Serif" "Noto Serif CJK SC" "Noto Serif CJK TC" "Charis SIL" ];
+    sansSerif = [ "Geist" "Inter" "Noto Sans" "Noto Sans CJK SC" "Noto Sans CJK TC" "Charis SIL" ];
+    monospace = [ "JetBrainsMono Nerd Font Mono" "JetBrains Mono" "Noto Sans Mono" "Noto Sans CJK SC" "Noto Sans CJK TC" "Charis SIL"];
   };
 
   localConf = ''
@@ -141,5 +91,51 @@ fonts.fontconfig = {
 };
 
 
+# #make by myself
+# fonts.fontconfig = {
+#   antialias = true;
+#   hinting = {
+#     enable = true;          # включаем, но слабый
+#     style = "slight";   # или "none" для ещё ближе к macOS
+#   };
+#   defaultFonts = {
+#     serif     = [ "Geist" "Inter" ]; # Inter
+#     sansSerif = [ "Geist" "Inter" ]; # Inter
+#     monospace = [ "JetBrainsMono Nerd Font Mono" "JetBrains Mono" ];
+#     };
+#
+#   localConf = ''
+#     <?xml version='1.0'?>
+#     <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+#     <fontconfig>
+#
+#       <!-- macOS-подобный: слабый хинтинг + legacy фильтр для мягкости -->
+#       <match target="font">
+#         <edit name="antialias" mode="assign"><bool>true</bool></edit>
+#         <edit name="hinting" mode="assign"><bool>true</bool></edit>
+#         <edit name="hintstyle" mode="assign"><const>hintslight</const></edit>
+#         <edit name="rgba" mode="assign"><const>rgb</const></edit>
+#         <edit name="lcdfilter" mode="assign"><const>lcdlegacy</const></edit>  <!-- или lcdlight для ещё мягче -->
+#       </match>
+#
+#       <!-- Отключаем bytecode hinting где возможно (ближе к macOS) -->
+#       <match target="font">
+#         <test name="embeddedbitmap" compare="contains"><bool>false</bool></test>
+#         <edit name="autohint" mode="assign"><bool>false</bool></edit>  <!-- выключаем автогинт -->
+#       </match>
+#
+#       <!-- Для Chrome часто помогает -->
+#       <alias>
+#         <family>sans-serif</family>
+#         <prefer>
+#           <family>Helvetica Neue</family>
+#           <family>Arial</family>
+#           <family>Noto Sans</family>
+#         </prefer>
+#       </alias>
+#
+#     </fontconfig>
+#   '';
+# };
 
 }

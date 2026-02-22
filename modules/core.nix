@@ -15,8 +15,18 @@
   };
 
   # nixpkgs.config.allowUnfree = true; # все таки нужен. для wifi driver.
-  documentation.enable = false;
   system.stateVersion = "25.11";
+
+# ────────────────────── docs ──────────────────────
+  # documentation.enable = false;
+  
+  documentation = {
+    enable = true;
+    man.enable = true;
+    man.generateCaches = true;
+    dev.enable = true;
+    nixos.enable = true;
+  };
 
 # ────────────────────── sddm ──────────────────────
 services.xserver.enable = true;

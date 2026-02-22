@@ -8,7 +8,7 @@
     # (рекомендую именно этот — полный контроль, легко править в Nix)
     settings = {
       main = {
-        font = "JetBrainsMono Nerd Font:size=15";
+        font = "JetBrainsMono Nerd Font:size=13";
       };
 
       colors = {
