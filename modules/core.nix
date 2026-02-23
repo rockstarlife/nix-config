@@ -1,9 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nix-cachyos-kernel, ... }:
 
 {
 # ────────────────────── kernel ──────────────────────
   # boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest; # может быть более быстрым.
+  # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest; # может быть более быстрым.
+  # boot.kernelPackages = pkgs.linuxPackages_cachyos-lto; # божественное ядро.
+  # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-bore-lto-x86_64-v3;
+  # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
 # ────────────────────── ZRAM ──────────────────────
   zramSwap.enable = true;
   zramSwap.memoryPercent = 50;

@@ -25,37 +25,25 @@ outputs = { self, nixpkgs, unstable, home-manager, ... } @ inputs: let
       config.allowUnfree = true; # доступ к проприетарным пакетам типо google-chrome
     };
 
+    root = self.outPath;
+
   in {
     nixosConfigurations.nixmac = nixpkgs.lib.nixosSystem { # здесь мы начинаем строить систему. 
       inherit system; # передаём архитектуру в nixosSystem
 
-      specialArgs = { inherit unstablePkgs; };   # делаем unstablePkgs доступным во всех модулях как аргумент
+      specialArgs = { inherit unstablePkgs root; };   # делаем unstablePkgs доступным во всех модулях как аргумент
 
       modules = [
         ./hosts/nixmac/default.nix # основной файл конфигурации машины
+      ];
+    };
 
-
-        home-manager.nixosModules.home-manager
-
-        {
-          # ← вот это обязательно для всей системы
-          nixpkgs.config.allowUnfree = true;
-
-          # базовые настройки home-manager (минимально)
-          home-manager.useGlobalPkgs     = true;     # берёт pkgs из системы (stable)
-          home-manager.useUserPackages   = true;     # ставит пакеты в ~/.nix-profile
-          home-manager.users.neo = {
-          home.stateVersion = "25.11";             # обязательно, как system.stateVersion
-
-          # здесь пока пусто, но дальше добавишь
-          # programs.fish.enable = true;
-          # home.packages = [ pkgs.ripgrep pkgs.fd ];
-        };
-
-        # если хочешь unstable-пакеты в home-manager — передаём их
-        home-manager.extraSpecialArgs = { inherit unstablePkgs; };
-
-        }
+    # standalone home-manager
+    homeConfigurations.neo = home-manager.lib.homeManagerConfiguration {
+      pkgs = pkgs;
+      extraSpecialArgs = { inherit unstablePkgs root; };  # чтобы unstablePkgs был доступен
+      modules = [
+        ./home/neo/default.nix
       ];
     };
   };

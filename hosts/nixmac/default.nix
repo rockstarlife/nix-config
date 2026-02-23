@@ -9,6 +9,7 @@
     ../../modules/fonts.nix
     ../../modules/river.nix
     ../../modules/unstable.nix
+    # ../../modules/cachyos.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
