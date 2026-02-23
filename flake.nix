@@ -31,12 +31,15 @@ outputs = { self, nixpkgs, unstable, home-manager, nix-cachyos-kernel, ... } @ i
     };
 
     root = self.outPath;
-
   in {
     nixosConfigurations.nixmac = nixpkgs.lib.nixosSystem { # здесь мы начинаем строить систему. 
       inherit system; # передаём архитектуру в nixosSystem
 
-      specialArgs = { inherit unstablePkgs root; };   # делаем unstablePkgs доступным во всех модулях как аргумент
+      specialArgs = { 
+        inherit unstablePkgs;
+        inherit root;
+        inherit inputs;
+      };   # делаем unstablePkgs, root, inputs доступным во всех модулях как аргумент
 
       modules = [
         ./hosts/nixmac/default.nix # основной файл конфигурации машины

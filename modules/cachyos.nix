@@ -16,9 +16,8 @@
     ];
   };
 
-  # 3. Выбираем ядро (рекомендую для тебя: LTS + bore + lto + v3 для Broadwell)
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-bore-lto-x86_64-v3;
-
+  # 3. Выбираем ядро
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto;
   # Альтернативы, если хочешь потестить (раскомментируй одну):
   # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-bore-lto-x86_64-v3;  # свежее, но чаще ребуты
   # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;         # latest без LTS
