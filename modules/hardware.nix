@@ -8,7 +8,6 @@
   nixpkgs.config.permittedInsecurePackages = [
     "broadcom-sta-6.30.223.271-59-6.18.8"  # если ругается — подставь точное имя из ошибки
   ];
-
 # ────────────────────── bluetooth ──────────────────────
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;

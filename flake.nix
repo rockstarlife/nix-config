@@ -5,10 +5,10 @@ inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    nix-cachyos-kernel = {
-      url = "github:xddxdd/nix-cachyos-kernel/release";
-      # inputs.nixpkgs.follows = "nixpkgs"; потому что  relese уже его буинарники, собирать не нужно.
-    };
+    # nix-cachyos-kernel = {
+    #   url = "github:xddxdd/nix-cachyos-kernel/release";
+    #   # inputs.nixpkgs.follows = "nixpkgs"; потому что  relese уже его буинарники, собирать не нужно.
+    # };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -16,7 +16,7 @@ inputs = {
   };
 };
 
-outputs = { self, nixpkgs, unstable, home-manager, nix-cachyos-kernel, ... } @ inputs: let
+outputs = { self, nixpkgs, unstable, home-manager, ... } @ inputs: let # nix-cachyos-kernel,
 
     system = "x86_64-linux"; # прописываем архитектуру один раз.
 
@@ -43,7 +43,7 @@ outputs = { self, nixpkgs, unstable, home-manager, nix-cachyos-kernel, ... } @ i
 
       modules = [
         ./hosts/nixmac/default.nix # основной файл конфигурации машины
-        ./modules/cachyos.nix
+        # ./modules/cachyos.nix
       ];
     };
 

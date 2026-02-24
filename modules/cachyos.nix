@@ -10,18 +10,25 @@
   nix.settings = {
     substituters = [
       "https://attic.xuyh0120.win/lantian"
+      "https://cache.garnix.io"
     ];
     trusted-public-keys = [
       "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
 
-  # 3. Выбираем ядро
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto;
-  # Альтернативы, если хочешь потестить (раскомментируй одну):
-  # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-bore-lto-x86_64-v3;  # свежее, но чаще ребуты
-  # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;         # latest без LTS
 
-  # Опционально: если используешь ZFS — добавь это (но у тебя нет, так что пропусти)
-  # boot.zfs.package = config.boot.kernelPackages.zfs_cachyos;
+nixpkgs.config.allowUnfree = true;
+  # 3. Выбираем ядро
+# boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-lto;
+# или с v3 для твоего Broadwell (лучше производительность):
+# boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-lto-x86_64-v3;
+# boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto;
+# boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts; # кажись есть в cash
+# boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
+# boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-lto;
+# boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-lto-x86_64-v3;
+boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-lto;
+
 }
