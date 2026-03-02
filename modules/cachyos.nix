@@ -18,17 +18,8 @@
     ];
   };
 
-
 nixpkgs.config.allowUnfree = true;
   # 3. Выбираем ядро
-# boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-lto;
-# или с v3 для твоего Broadwell (лучше производительность):
-# boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-lto-x86_64-v3;
 # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto;
-# boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts; # кажись есть в cash
-# boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
 # boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-lto;
-# boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-lto-x86_64-v3;
-boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-lto;
-
 }

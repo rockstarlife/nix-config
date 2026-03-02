@@ -43,7 +43,7 @@ outputs = { self, nixpkgs, unstable, home-manager, ... } @ inputs: let # nix-cac
 
       modules = [
         ./hosts/nixmac/default.nix # основной файл конфигурации машины
-        # ./modules/cachyos.nix
+        # ./modules/cachyos.nix # for cachyos kernels from xddxdd rep.
       ];
     };
 

@@ -2,9 +2,9 @@
 
 {
 # ────────────────────── kernel ──────────────────────
-  # boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest; # лучший вариант из nixpkgs.
-# ────────────────────── ZRAM ──────────────────────
+  boot.kernelPackages = pkgs.linuxPackages_zen; # лучший варинат
+  # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest; # быстрее чем zen, но логает звук.
+  # ────────────────────── ZRAM ──────────────────────
   zramSwap.enable = true;
   zramSwap.memoryPercent = 50;
 
