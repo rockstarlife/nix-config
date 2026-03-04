@@ -2,8 +2,8 @@
 
 {
 # ────────────────────── kernel ──────────────────────
-  # boot.kernelPackages = pkgs.linuxPackages_zen; # лучший варинат
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest; # быстрее чем zen, может лагать звук.
+  boot.kernelPackages = pkgs.linuxPackages_zen; # лучший варинат
+  # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest; # быстрее чем zen, может лагать звук.
 
   # ────────────────────── ZRAM ──────────────────────
   zramSwap.enable = true;
@@ -31,8 +31,29 @@
 
 # ────────────────────── sddm ──────────────────────
 services.xserver.enable = true;
-services.displayManager.sddm.enable = true;
-services.displayManager.sddm.wayland.enable = true;
+# services.displayManager.sddm.enable = true;
+# services.displayManager.sddm.wayland.enable = true;
+
+#new
+# services.greetd = {
+#   enable = true;
+#   settings = {
+#     default_session = {
+#       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd river";
+#       user = "neo";
+#     };
+#   };
+# };
+
+services.greetd = {
+  enable = true;
+  settings = {
+    default_session = {
+      command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd river";
+      user = "greeter";
+    };
+  };
+};
 
 # ────────────────────── user ──────────────────────
   users.users.neo = {

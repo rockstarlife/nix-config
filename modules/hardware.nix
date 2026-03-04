@@ -6,7 +6,7 @@
   boot.blacklistedKernelModules = [ "b43" "b43legacy" "ssb" "bcma" "brcmfmac" "brcmsmac" "brcm80211" ];
 
   nixpkgs.config.permittedInsecurePackages = [
-    "broadcom-sta-6.30.223.271-59-6.18.8"  # если ругается — подставь точное имя из ошибки broadcom-sta-6.30.223.271-59-6.18.8
+    "broadcom-sta-6.30.223.271-59-6.18.13"  # если ругается — подставь точное имя из ошибки broadcom-sta-6.30.223.271-59-6.18.8
   ]; # for skip "NIXPKGS_ALLOW_INSECURE=1"
 # sudo NIXPKGS_ALLOW_INSECURE=1 nixos-rebuild switch --flake /etc/nixos/nix-config#nixmac --impure
 

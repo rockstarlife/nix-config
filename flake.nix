@@ -10,13 +10,16 @@ inputs = {
     #   # inputs.nixpkgs.follows = "nixpkgs"; потому что  relese уже его буинарники, собирать не нужно.
     # };
 
+    nix-colors.url = "github:misterio77/nix-colors";
+    # nix-colors.inputs.nixpkgs.follows = "nixpkgs";  # опционально, чтобы версии совпадали
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";  # ← важно! чтобы не дублировать nixpkgs
   };
 };
 
-outputs = { self, nixpkgs, unstable, home-manager, ... } @ inputs: let # nix-cachyos-kernel,
+outputs = { self, nixpkgs, unstable, home-manager, nix-colors, ... } @ inputs: let # nix-cachyos-kernel,
 
     system = "x86_64-linux"; # прописываем архитектуру один раз.
 
@@ -50,7 +53,11 @@ outputs = { self, nixpkgs, unstable, home-manager, ... } @ inputs: let # nix-cac
     # standalone home-manager
     homeConfigurations.neo = home-manager.lib.homeManagerConfiguration {
       pkgs = pkgs;
-      extraSpecialArgs = { inherit unstablePkgs root; };  # чтобы unstablePkgs был доступен
+
+      extraSpecialArgs = { 
+        inherit unstablePkgs root inputs nix-colors;
+        };  # чтобы unstablePkgs был доступен
+
       modules = [
         ./home/neo/default.nix
       ];
