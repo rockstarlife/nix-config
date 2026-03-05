@@ -1,5 +1,5 @@
 {
-  description = "minimal tty";
+  description = "my NixOS setup, kiss and declarative";
 
 inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
@@ -10,8 +10,9 @@ inputs = {
     #   # inputs.nixpkgs.follows = "nixpkgs"; потому что  relese уже его буинарники, собирать не нужно.
     # };
 
-    nix-colors.url = "github:misterio77/nix-colors";
-    # nix-colors.inputs.nixpkgs.follows = "nixpkgs";  # опционально, чтобы версии совпадали
+    catppuccin.url = "github:catppuccin/nix";  # main — unstable, свежий
+    catppuccin.inputs.nixpkgs.follows = "nixpkgs";  # твой stable 25.11
+
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -19,7 +20,7 @@ inputs = {
   };
 };
 
-outputs = { self, nixpkgs, unstable, home-manager, nix-colors, ... } @ inputs: let # nix-cachyos-kernel,
+outputs = { self, nixpkgs, unstable, home-manager, catppuccin, ... } @ inputs: let # nix-cachyos-kernel,
 
     system = "x86_64-linux"; # прописываем архитектуру один раз.
 
@@ -55,11 +56,12 @@ outputs = { self, nixpkgs, unstable, home-manager, nix-colors, ... } @ inputs: l
       pkgs = pkgs;
 
       extraSpecialArgs = { 
-        inherit unstablePkgs root inputs nix-colors;
+        inherit unstablePkgs root inputs;
         };  # чтобы unstablePkgs был доступен
 
       modules = [
         ./home/neo/default.nix
+        inputs.catppuccin.homeModules.catppuccin
       ];
     };
   };

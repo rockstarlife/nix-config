@@ -1,5 +1,5 @@
 # ./home/neo/default.nix
-{ config, pkgs, unstablePkgs, lib, inputs, nix-colors, ... }:
+{ config, pkgs, unstablePkgs, lib, inputs,  ... }:
 
 {
   # ← вот эти две строки обязательны для standalone
@@ -8,16 +8,55 @@
   home.stateVersion = "25.11";
 
   imports = [
-    nix-colors.homeManagerModules.default
-
-    ./cli/btop.nix
+    # ./cli/btop.nix
     # ./cli/cava.nix
-    ./gui/foot.nix
+    # ./gui/foot.nix
   ];
-colorScheme = nix-colors.colorSchemes.catppuccin-mocha;
 
-  # Если хочешь использовать unstable пакеты в home (например foot из unstable)
-  # home.packages = [ unstablePkgs.foot ];
+catppuccin = {
+  enable = true;
+  flavor = "latte"; # mocha
+  accent = "teal";  # или blue, green, rosewater — выбирай
+};
 
-  # Или оставь foot из stable — он обычно не нужен из unstable
+programs.foot = {
+  enable = true;
+
+  settings = {
+    main = {
+      font = "JetBrainsMono Nerd Font:size=20";
+      dpi-aware = "yes";  # для твоего MacBook Air — полезно
+    };
+  };
+};
+catppuccin.foot.enable = true;
+
+programs.fish.enable = true;
+catppuccin.fish.enable = true;
+
+programs.starship = {
+  enable = true;
+  enableFishIntegration = true;  # ← это важно, автоматически добавит init в fish
+
+  settings = {
+    battery = {
+      disabled = true;
+    };
+  };
+};
+catppuccin.starship.enable = true;
+
+programs.btop.enable = true;
+catppuccin.btop.enable = true;
+
+programs.cava.enable = true;
+catppuccin.cava.enable = true;
+
+programs.yazi.enable = true;
+catppuccin.yazi.enable = true;
+
+programs.fuzzel.enable = true;
+catppuccin.fuzzel.enable = true;
+catppuccin.fuzzel.accent = "teal";
+
 }
