@@ -85,6 +85,29 @@ services.greetd = {
     tree
     jq
     home-manager
+    # for arch pkgs
+    zstd
+    gnutar
+    # for openclaw
+    nodejs_24
+    gcc
+    gnumake
+    pkg-config
+    pixman
+    cairo
+    pango
+    libjpeg
+    libpng
+    giflib
+    libwebp
+    libexif
+    libheif
+    libjxl           # иногда нужно
+    python3
+    vips
+    cmake
+#omarchy
+    bluetui # bluetooth tui
   ];
 
 # ────────────────────── boot ──────────────────────

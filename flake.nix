@@ -1,3 +1,4 @@
+#/etc/nixos/nix-config/flake.nix
 {
   description = "my NixOS setup, kiss and declarative";
 
@@ -13,6 +14,9 @@ inputs = {
     catppuccin.url = "github:catppuccin/nix";  # main — unstable, свежий
     catppuccin.inputs.nixpkgs.follows = "nixpkgs";  # твой stable 25.11
 
+    # nix-openclaw.url = "github:openclaw/nix-openclaw"; # my ai assistant
+    # nix-openclaw.inputs.nixpkgs.follows = "nixpkgs";
+
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -20,7 +24,7 @@ inputs = {
   };
 };
 
-outputs = { self, nixpkgs, unstable, home-manager, catppuccin, ... } @ inputs: let # nix-cachyos-kernel,
+outputs = { self, nixpkgs, unstable, home-manager, catppuccin, ... } @ inputs: let
 
     system = "x86_64-linux"; # прописываем архитектуру один раз.
 

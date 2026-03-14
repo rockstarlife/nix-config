@@ -11,11 +11,13 @@
     # ./cli/btop.nix
     # ./cli/cava.nix
     # ./gui/foot.nix
+    # ./openclaw.nix
   ];
 
 catppuccin = {
   enable = true;
-  flavor = "latte"; # mocha
+  # flavor = "latte";
+  flavor = "mocha";
   accent = "teal";  # или blue, green, rosewater — выбирай
 };
 
@@ -59,4 +61,7 @@ programs.fuzzel.enable = true;
 catppuccin.fuzzel.enable = true;
 catppuccin.fuzzel.accent = "teal";
 
+
+programs.anki.enable = true;
+catppuccin.anki.enable = true;
 }
