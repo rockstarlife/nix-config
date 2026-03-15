@@ -9,6 +9,7 @@
     ../../modules/fonts.nix
     ../../modules/river.nix
     ../../modules/unstable.nix
+    ../../modules/block-list.nix
     # ../../modules/cachyos.nix
   ];
 
