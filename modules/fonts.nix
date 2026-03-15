@@ -13,6 +13,7 @@
     charis # for IPA
   ];
 
+
 fonts.fontconfig = {
   antialias = true;
   hinting = {
