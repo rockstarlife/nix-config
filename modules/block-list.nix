@@ -6,7 +6,6 @@ services.xserver = {
 
   excludePackages = with pkgs; [
     xterm          # ← вот это убирает xterm полностью
-    xorg.xterm     # на всякий случай, иногда пишут так
   ];
 };
 
