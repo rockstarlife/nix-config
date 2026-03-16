@@ -108,6 +108,7 @@ services.greetd = {
     cmake
 #omarchy
     bluetui # bluetooth tui
+    wiremix
   ];
 
 # ────────────────────── boot ──────────────────────

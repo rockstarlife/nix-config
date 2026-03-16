@@ -6,7 +6,8 @@
   environment.systemPackages = with pkgs; [
     river-classic
     swaybg
-    wlr-randr
+    wlr-randr # screen cli
+    kanshi # screen demon
     wlrctl # for mouse move when start river
     wl-clipboard
     pamixer

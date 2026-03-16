@@ -1,0 +1,14 @@
+# ~/.config/kanshi/config-main
+
+profile docked {
+    output HDMI-A-1 {
+        enable
+        position 0,0
+        scale 1.25
+        mode 1920x1080@100Hz
+    }
+
+    output eDP-1 {
+        disable
+    }
+}

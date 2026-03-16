@@ -239,7 +239,12 @@ riverctl map normal Alt Return spawn fuzzel
 # ────────────────────────────────────────────
 # new set up mac stay normal
 # wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1440,0 --scale 1.25 # this
-wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1152,0 --scale 1.25
+# wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1152,0 --scale 1.25
+riverctl spawn "kanshi -c ~/.config/kanshi/config"
+riverctl map normal Alt+Shift 9 spawn "kanshi -c ~/.config/kanshi/config"
+riverctl map normal Alt+Shift 8 spawn "kanshi -c ~/.config/kanshi/config-main"
+riverctl map normal Alt+Shift 7 spawn "kanshi -c ~/.config/kanshi/config-main-rotated"
+riverctl map normal Alt+Shift 6 spawn "kanshi -c ~/.config/kanshi/config-rotated"
 
 # если мышь лагает обнулить экраны.
 riverctl map normal Alt+Shift 0 spawn "wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1152,0 --scale 1.25"

@@ -1,0 +1,16 @@
+# ~/.config/kanshi/config-rotated   ← вертикальный HDMI
+profile docked-rotated {
+    output HDMI-A-1 {
+        enable
+        position 0,0
+        scale 1.25
+        transform 90
+        mode 1920x1080@100Hz
+    }
+    output eDP-1 {
+        enable
+        position -1440,0
+        scale 1.25
+        mode 1440x900@60Hz
+    }
+}
