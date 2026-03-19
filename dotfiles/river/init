@@ -238,29 +238,35 @@ riverctl map normal Alt Return spawn fuzzel
 
 # ────────────────────────────────────────────
 # new set up mac stay normal
-# wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1440,0 --scale 1.25 # this
+# wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1440,0 --scale 1.25 # this is old
 # wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1152,0 --scale 1.25
-riverctl spawn "kanshi -c ~/.config/kanshi/config"
-riverctl map normal Alt+Shift 9 spawn "kanshi -c ~/.config/kanshi/config"
-riverctl map normal Alt+Shift 8 spawn "kanshi -c ~/.config/kanshi/config-main"
-riverctl map normal Alt+Shift 7 spawn "kanshi -c ~/.config/kanshi/config-main-rotated"
-riverctl map normal Alt+Shift 6 spawn "kanshi -c ~/.config/kanshi/config-rotated"
+# riverctl spawn "kanshi -c ~/.config/kanshi/config"
+riverctl spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main-rotated"
+
+riverctl map normal Alt+Shift 9 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config"
+riverctl map normal Alt+Shift 8 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main"
+riverctl map normal Alt+Shift 7 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main-rotated"
+riverctl map normal Alt+Shift 6 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-rotated"
+riverctl map normal Alt+Shift 5 spawn "pkill kanshi; kanshi -c kanshi -c ~/.config/kanshi/config-laptop-only"
+riverctl spawn "pkill swaybg; swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/cover-Macroblank-死のダンス-upscaled.png -m fit --color 000000 &"
+riverctl spawn "pkill swaybg; swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/cover-Macroblank-死のダンス-upscaled.png -m fit --color 000000 &"
+# riverctl focus-output next
 
 # если мышь лагает обнулить экраны.
-riverctl map normal Alt+Shift 0 spawn "wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1152,0 --scale 1.25"
-swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/Macroblank-死のダンス-upscaled.png -m fill &
-# swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/fantasy-art.jpg -m fill &
-swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/Macroblank-死のダンス-upscaled.png -m fill &
+# riverctl map normal Alt+Shift 0 spawn "wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1152,0 --scale 1.25"
 
-riverctl focus-output next
+# swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/Macroblank-死のダンス-upscaled.png -m fill &
+# swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/Macroblank-死のダンス-upscaled.png -m fill &
+
+# riverctl focus-output next
 # riverctl spawn 'sh -c "wlrctl pointer move 1441 0"'
 
 # Отключить встроенный экран (Alt+Shift + -)
-riverctl map normal Alt+Shift minus spawn "wlr-randr --output eDP-1 --off"
+# riverctl map normal Alt+Shift minus spawn "wlr-randr --output eDP-1 --off"
 #riverctl spawn "wlr-randr --output eDP-1 --off"
 
 # Включить и поставить на место слева (-1440,0) (Alt+Shift + =)
-riverctl map normal Alt+Shift equal spawn "wlr-randr --output eDP-1 --on --preferred --pos -1152,0 --scale 1"
+# riverctl map normal Alt+Shift equal spawn "wlr-randr --output eDP-1 --on --preferred --pos -1152,0 --scale 1"
 
 # ────────────────────────────────────────────
 # left side

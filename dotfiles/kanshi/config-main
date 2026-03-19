@@ -6,6 +6,7 @@ profile docked {
         position 0,0
         scale 1.25
         mode 1920x1080@100Hz
+        transform normal
     }
 
     output eDP-1 {
