@@ -6,5 +6,6 @@
     firefox
     telegram-desktop
     yt-dlp
+    koodo-reader
   ];
 }

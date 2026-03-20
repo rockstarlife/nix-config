@@ -109,8 +109,6 @@ services.greetd = {
 #omarchy
     bluetui # bluetooth tui
     wiremix
-# for books
-    koodo-reader
   ];
 
 # ────────────────────── boot ──────────────────────
