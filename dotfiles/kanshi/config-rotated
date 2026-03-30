@@ -9,7 +9,7 @@ profile docked-rotated {
     }
     output eDP-1 {
         enable
-        position -1440,0
+        position -1152,816
         scale 1.25
         mode 1440x900@60Hz
     }

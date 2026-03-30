@@ -11,6 +11,10 @@
     noto-fonts-cjk-serif
     tex-gyre.termes # time new romans coppy 1:1.
     charis # for IPA
+    #for reading books
+    # manrope
+    paratype-pt-serif
+    merriweather
   ];
 
 

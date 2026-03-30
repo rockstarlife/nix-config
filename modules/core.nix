@@ -1,4 +1,4 @@
-{ config, pkgs, nix-cachyos-kernel, ... }:
+{ config, pkgs, ... }:
 
 {
 # ────────────────────── kernel ──────────────────────
@@ -74,6 +74,19 @@ services.greetd = {
     # as = "neo";  # это заставит doas работать от имени neo, а не root
   }];
 
+
+# ────────────────────── localsend aridrop for linux ──────────────────────
+programs.localsend.enable = true;
+
+# # === Shadowsocks сервер ===
+#   networking.firewall = {
+#     allowedTCPPorts = [ 8443 ];
+#     allowedUDPPorts = [ 8443 ];   # нужно для UDP-режима (рекомендую оставить)
+#   };
+
+# ────────────────────── for qemu ──────────────────────
+# boot.kernelModules = [ "kvm-intel" ];
+
 # ────────────────────── pkgs ──────────────────────
   environment.systemPackages = with pkgs; [
     git
@@ -106,9 +119,15 @@ services.greetd = {
     python3
     vips
     cmake
+    unzip
+    appimage-run
 #omarchy
     bluetui # bluetooth tui
     wiremix
+# some
+    qemu
+    OVMF
+    # virt-viewer  ← закомментируй, если пока не нужен
   ];
 
 # ────────────────────── boot ──────────────────────

@@ -4,5 +4,6 @@ profile laptop-only {
         position 0,0
         scale 1.25
         mode 1440x900@60Hz
+        transform normal
     }
 }

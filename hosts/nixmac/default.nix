@@ -11,6 +11,7 @@
     ../../modules/unstable.nix
     ../../modules/block-list.nix
     # ../../modules/cachyos.nix
+    ../../modules/input-method.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

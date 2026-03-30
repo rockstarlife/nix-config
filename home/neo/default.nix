@@ -63,5 +63,5 @@ catppuccin.fuzzel.accent = "teal";
 
 
 programs.anki.enable = true;
-catppuccin.anki.enable = true;
+# catppuccin.anki.enable = true;
 }

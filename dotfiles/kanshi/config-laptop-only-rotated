@@ -1,0 +1,11 @@
+# ~/.config/kanshi/config-laptop-only-rotated
+
+profile config-laptop-only-rotated {
+    output eDP-1 {
+        enable
+        position -1152,0
+        scale 1.25
+        transform 90
+        mode 1440x900@60Hz
+    }
+}

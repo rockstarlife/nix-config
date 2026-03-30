@@ -225,24 +225,11 @@ riverctl map normal Control+Shift Tab spawn "koodo-reader --ozone-platform=wayla
 riverctl map normal Alt Return spawn fuzzel
 
 # ────────────────────── Monitors ──────────────────────
+# what I'm have?
 # HDMI-A-1 1920x1080@100Hz
 # eDP-1 1440x900@59.996Hz
 
-# ────────────────────────────────────────────
-# # main monitor is vertical for text
-# wlr-randr --output HDMI-A-1 --transform 90 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1440,0 --scale 1.25 # this
-# # or  eDP-1 --pos -1152,0 # qalc 1440/1.25
-# riverctl map normal Alt+Shift 0 spawn "wlr-randr --output HDMI-A-1 --transform 90 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1440,0 --scale 1.25"
-# swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/fantasy-art.jpg -m fill &
-# swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/fantasy-art.jpg -m fill &
-# riverctl focus-output next
-# riverctl map normal Alt+Shift minus spawn "wlr-randr --output eDP-1 --off"
-# riverctl map normal Alt+Shift equal spawn "wlr-randr --output eDP-1 --on --preferred --pos -1440,0 --scale 1"
-
-# ────────────────────────────────────────────
-# new set up mac stay normal
-# wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1440,0 --scale 1.25 # this is old
-# wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1152,0 --scale 1.25
+# ────────────────────── Kanshi ──────────────────────
 # riverctl spawn "kanshi -c ~/.config/kanshi/config"
 riverctl spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main-rotated"
 
@@ -250,51 +237,17 @@ riverctl map normal Alt+Shift 9 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/
 riverctl map normal Alt+Shift 8 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main"
 riverctl map normal Alt+Shift 7 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main-rotated"
 riverctl map normal Alt+Shift 6 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-rotated"
-riverctl map normal Alt+Shift 5 spawn "pkill kanshi; kanshi -c kanshi -c ~/.config/kanshi/config-laptop-only"
-riverctl spawn "pkill swaybg; swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/cover-Macroblank-死のダンス-upscaled.png -m fit --color 000000 &"
-riverctl spawn "pkill swaybg; swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/cover-Macroblank-死のダンス-upscaled.png -m fit --color 000000 &"
-# riverctl focus-output next
+riverctl map normal Alt+Shift 5 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-laptop-only"
+riverctl map normal Alt+Shift 4 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-laptop-only-rotated"
 
-# если мышь лагает обнулить экраны.
-# riverctl map normal Alt+Shift 0 spawn "wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1.25 | wlr-randr --output eDP-1 --pos -1152,0 --scale 1.25"
+# ────────────────────── swaybg and wallpaper ──────────────────────
+# riverctl spawn "swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/cover-Macroblank-死のダンス-upscaled.png -m fit --color 000000 &"
+# riverctl spawn "swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/cover-Macroblank-死のダンス-upscaled.png -m fit --color 000000 &"
 
-# swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/Macroblank-死のダンス-upscaled.png -m fill &
-# swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/Macroblank-死のダンス-upscaled.png -m fill &
-
-# riverctl focus-output next
-# riverctl spawn 'sh -c "wlrctl pointer move 1441 0"'
-
-# Отключить встроенный экран (Alt+Shift + -)
-# riverctl map normal Alt+Shift minus spawn "wlr-randr --output eDP-1 --off"
-#riverctl spawn "wlr-randr --output eDP-1 --off"
-
-# Включить и поставить на место слева (-1440,0) (Alt+Shift + =)
-# riverctl map normal Alt+Shift equal spawn "wlr-randr --output eDP-1 --on --preferred --pos -1152,0 --scale 1"
-
-# ────────────────────────────────────────────
-# left side
-# /usr/bin/wlr-randr --output eDP-1 --transform 270 --scale 1
-# swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/Mona_Lisa_by_Leonardo_da_Vinci.jpg -m fill &
-#
-# /usr/bin/wlr-randr --output HDMI-A-1 --pos 960,0 --scale 1
-# swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/brain-with-chip.webp -m fill &
-
-# # right side
-# /usr/bin/wlr-randr --output eDP-1 --pos 1920,-360 --transform 90 --scale 1
-# swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/Mona_Lisa_by_Leonardo_da_Vinci.jpg -m fill &
-#
-# /usr/bin/wlr-randr --output HDMI-A-1 --pos 0,0 --scale 1
-# swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/brain-with-chip.webp -m fill &
-# # swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/The-Creation-of-Adam.png -m fill &
-#
-# # перебрасывает фокус на HDMI-A-1 при старте.
-# riverctl focus-output next
-# # перебрасывает курсор в лево по максимум.
-# # wlrctl pointer move -3000 0
-# riverctl spawn 'sh -c "wlrctl pointer move -3000 0"'
+riverctl spawn "swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/Vapor-Drive-upscaled.jpg -m fit --color 000000 &"
+riverctl spawn "swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/Vapor-Drive-upscaled.jpg -m fit --color 000000 &"
 
 # ────────────────────── Screenshots ──────────────────────
-# new
 # Alt+1 → выбранная область
 riverctl map normal Alt 1 spawn 'sh -c "
     # Копируем выбранную область в буфер
