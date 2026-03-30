@@ -190,8 +190,12 @@ rivertile -view-padding 0 -outer-padding 0 &
 # rivercarro -inner-gaps 0 -outer-gaps 0 -main-ratio 0.6 &
 # ────────────────────── my cod ──────────────────────
 # keyboard input
-riverctl keyboard-layout -options "grp:win_space_toggle,compose:ralt" "us,ru"
+# riverctl keyboard-layout -options "grp:win_space_toggle,compose:ralt" "us,ru"
 # переключение раскладки и доп символы.
+# Прямое переключение (самое надёжное, минимум ошибок)
+riverctl map normal Shift+Control Space spawn "fcitx5-remote -s pinyin&"    # → китайский
+riverctl map normal Shift+Super Space spawn "fcitx5-remote -s keyboard-us&" # → английский
+riverctl map normal Shift+Alt Space spawn "fcitx5-remote -s keyboard-ru&"   # → русский
 
 # riverctl keyboard-layout -options "grp:win_space_toggle" "us,ru"
 # google chrome turbo
@@ -231,7 +235,8 @@ riverctl map normal Alt Return spawn fuzzel
 
 # ────────────────────── Kanshi ──────────────────────
 # riverctl spawn "kanshi -c ~/.config/kanshi/config"
-riverctl spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main-rotated"
+# riverctl spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main-rotated"
+riverctl spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main"
 
 riverctl map normal Alt+Shift 9 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config"
 riverctl map normal Alt+Shift 8 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main"
@@ -239,13 +244,20 @@ riverctl map normal Alt+Shift 7 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/
 riverctl map normal Alt+Shift 6 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-rotated"
 riverctl map normal Alt+Shift 5 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-laptop-only"
 riverctl map normal Alt+Shift 4 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-laptop-only-rotated"
+riverctl map normal Alt+Shift 3 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-laptop-only-rotated-v2"
 
 # ────────────────────── swaybg and wallpaper ──────────────────────
 # riverctl spawn "swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/cover-Macroblank-死のダンス-upscaled.png -m fit --color 000000 &"
 # riverctl spawn "swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/cover-Macroblank-死のダンス-upscaled.png -m fit --color 000000 &"
 
-riverctl spawn "swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/Vapor-Drive-upscaled.jpg -m fit --color 000000 &"
-riverctl spawn "swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/Vapor-Drive-upscaled.jpg -m fit --color 000000 &"
+# riverctl spawn "swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/turquoise-butterfly.jpg -m fit --color 000000 &"
+# riverctl spawn "swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/turquoise-butterfly.jpg -m fit --color 000000 &"
+
+riverctl spawn "swaybg -i /home/neo/Pictures/offline-wallpapers/turquoise-butterfly.jpg -m fit --color 000000 &"
+
+# riverctl spawn "swaybg -i /home/neo/Pictures/offline-wallpapers/violet-butterfly.jpg -m fit --color 000000 &"
+#
+# riverctl spawn "swaybg -i /home/neo/Pictures/offline-wallpapers/sunset-butterfly.jpg -m fit --color 000000 &"
 
 # ────────────────────── Screenshots ──────────────────────
 # Alt+1 → выбранная область
