@@ -7,5 +7,6 @@
     telegram-desktop
     yt-dlp
     koodo-reader
+    anki-bin
   ];
 }

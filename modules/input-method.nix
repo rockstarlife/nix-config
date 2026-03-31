@@ -12,23 +12,38 @@
 
       addons = with pkgs; [
         fcitx5-gtk
-        qt6Packages.fcitx5-chinese-addons
+        fcitx5-rime
+        rime-data
+        # qt6Packages.fcitx5-chinese-addons
         # qt6Packages.fcitx5-configtool   # если нужен GUI
       ];
-
-      # Декларативный порядок (us/ru + pinyin)
-      settings = {
+#rime
+settings = {
         inputMethod = {
           "Groups/0" = {
             Name = "Default";
             "Default Layout" = "us";
-            DefaultIM = "pinyin";
+            DefaultIM = "rime";
           };
           "Groups/0/Items/0" = { Name = "keyboard-us"; };
           "Groups/0/Items/1" = { Name = "keyboard-ru"; };
-          "Groups/0/Items/2" = { Name = "pinyin"; };
+          "Groups/0/Items/2" = { Name = "rime"; };
         };
       };
+
+      # Декларативный порядок (us/ru + pinyin)
+      # settings = {
+      #   inputMethod = {
+      #     "Groups/0" = {
+      #       Name = "Default";
+      #       "Default Layout" = "us";
+      #       DefaultIM = "pinyin";
+      #     };
+      #     "Groups/0/Items/0" = { Name = "keyboard-us"; };
+      #     "Groups/0/Items/1" = { Name = "keyboard-ru"; };
+      #     "Groups/0/Items/2" = { Name = "pinyin"; };
+      #   };
+      # };
     };
   };
 
