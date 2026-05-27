@@ -195,7 +195,8 @@ rivertile -view-padding 0 -outer-padding 0 &
 # Прямое переключение (самое надёжное, минимум ошибок)
 riverctl map normal Alt F spawn "fcitx5-remote -s keyboard-us&" # → английский
 riverctl map normal Alt D spawn "fcitx5-remote -s keyboard-ru&" # → русский
-riverctl map normal Alt S spawn "fcitx5-remote -s pinyin&"      # → китайский
+# riverctl map normal Alt S spawn "fcitx5-remote -s rime&"        # → китайский
+riverctl map normal Alt S spawn "fcitx5-remote -s pinyin&" # → китайский
 
 # riverctl map normal Shift+Control Space spawn "fcitx5-remote -s pinyin&"    # → китайский
 # riverctl map normal Shift+Super Space spawn "fcitx5-remote -s keyboard-us&" # → английский
@@ -225,7 +226,11 @@ riverctl map normal Control+Shift Space spawn "chromium \
     --start-fullscreen"
 
 # ────────────────────── Koodo Reader ──────────────────────
-riverctl map normal Control+Shift Tab spawn "koodo-reader --ozone-platform=wayland --enable-features=WaylandWindowDecorations,UseOzonePlatform"
+riverctl map normal Super Z spawn "koodo-reader --ozone-platform=wayland --enable-features=WaylandWindowDecorations,UseOzonePlatform"
+# Нативный Wayland запуск Anki (Qt6 в anki-bin это поддерживает)
+
+# ────────────────────── Anki ──────────────────────
+riverctl map normal Super A spawn "ANKI_WAYLAND=1 anki &"
 
 # ────────────────────── search apps with fuzzel ──────────────────────
 # riverctl map normal Mod1 Space spawn fuzzel
@@ -244,6 +249,7 @@ riverctl spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main"
 
 riverctl map normal Alt+Shift 9 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config"
 riverctl map normal Alt+Shift 8 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main"
+riverctl map normal Alt+Shift O spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main-no-scale"
 riverctl map normal Alt+Shift 7 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main-rotated"
 riverctl map normal Alt+Shift 6 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-rotated"
 riverctl map normal Alt+Shift 5 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-laptop-only"
@@ -257,7 +263,8 @@ riverctl map normal Alt+Shift 3 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/
 # riverctl spawn "swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/turquoise-butterfly.jpg -m fit --color 000000 &"
 # riverctl spawn "swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/turquoise-butterfly.jpg -m fit --color 000000 &"
 
-riverctl spawn "swaybg -i /home/neo/Pictures/offline-wallpapers/turquoise-butterfly.jpg -m fit --color 000000 &"
+# riverctl spawn "swaybg -i /home/neo/Pictures/offline-wallpapers/turquoise-butterfly.jpg -m fit --color 000000 &"
+riverctl spawn "swaybg -i /home/neo/Pictures/offline-wallpapers/violet-butterfly.jpg -m fit --color 000000 &"
 
 # riverctl spawn "swaybg -i /home/neo/Pictures/offline-wallpapers/violet-butterfly.jpg -m fit --color 000000 &"
 #
@@ -330,7 +337,8 @@ riverctl map normal Control+Super 2 spawn "bluetoothctl disconnect E8:EE:CC:F7:A
 
 # ────────────────────── Mouse ──────────────────────
 # Чувствительность -1 - 1 такие значения можно задавать.
-riverctl input pointer-1133-45098-Logitech_Signature_M650 pointer-accel -0.2 # от -1.0 до 1.0:
+# riverctl input pointer-1133-45098-Logitech_Signature_M650 pointer-accel -0.2 # от -1.0 до 1.0
+riverctl input pointer-1133-45098-Logitech_Signature_M650 pointer-accel -0.65
 riverctl input pointer-1133-45098-Logitech_Signature_M650 accel-profile flat
 riverctl input pointer-1133-45098-Logitech_Signature_M650 scroll-factor 0.7 # 0.1–2.0, меньше — медленнее
 #usb mouse

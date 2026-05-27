@@ -5,6 +5,9 @@
   boot.kernelPackages = pkgs.linuxPackages_zen; # лучший варинат
   # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest; # быстрее чем zen, может лагать звук.
 
+# ────────────────────── sound prior and users tasks prior ──────────────────────
+security.rtkit.enable = true; # теперь звук в bluetooth устройствах не лагает.
+
   # ────────────────────── ZRAM ──────────────────────
   zramSwap.enable = true;
   zramSwap.memoryPercent = 50;
@@ -128,6 +131,7 @@ programs.localsend.enable = true;
     qemu
     OVMF
     # virt-viewer  ← закомментируй, если пока не нужен
+    transmission_4-gtk
   ];
 
 # ────────────────────── boot ──────────────────────

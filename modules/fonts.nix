@@ -5,16 +5,18 @@
   fonts.packages = with unstablePkgs; [
     geist-font # inter 2.0
     inter # open source clone of San Francisco from Apple.
-    nerd-fonts.jetbrains-mono
+    nerd-fonts.jetbrains-mono #for terminal mono
     noto-fonts # резервный самый глобальный шрифт, подходит для всего.
-    noto-fonts-cjk-sans # for asia lang.
-    noto-fonts-cjk-serif
     tex-gyre.termes # time new romans coppy 1:1.
-    charis # for IPA
+    # for chines
+    charis # for IPA not a char-sil they change
+    noto-fonts-cjk-sans # for asia lang.
+    noto-fonts-cjk-serif # newspaper
+    lxgw-wenkai # oldschool
     #for reading books
     # manrope
-    paratype-pt-serif
-    merriweather
+    # paratype-pt-serif
+    # merriweather
   ];
 
 

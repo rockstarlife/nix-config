@@ -1,0 +1,15 @@
+# ~/.config/kanshi/config-main-no-scale
+
+profile docked {
+    output HDMI-A-1 {
+        enable
+        position 0,0
+        scale 1.0
+        mode 1920x1080@100Hz
+        transform normal
+    }
+
+    output eDP-1 {
+        disable
+    }
+}

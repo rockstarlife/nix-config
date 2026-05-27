@@ -2,14 +2,9 @@
 { config, pkgs, unstablePkgs, ... }:
 
 {
-
-  # ────────────────────── stable ──────────────────────
-  environment.systemPackages = with pkgs; [
-    praat
-  ]
-  # ────────────────────── unstable ──────────────────────
-  // (with unstablePkgs; [
-    anki-bin
+  environment.systemPackages = with pkgs; [ 
+  # praat
+  ] ++ (with unstablePkgs; [ 
+  anki-bin 
   ]);
-
 }

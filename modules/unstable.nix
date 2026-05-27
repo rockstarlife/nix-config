@@ -7,6 +7,8 @@
     telegram-desktop
     yt-dlp
     koodo-reader
-    anki-bin
+    # anki-bin
+    droidcam
+    discord
   ];
 }

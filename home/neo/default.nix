@@ -62,6 +62,9 @@ catppuccin.fuzzel.enable = true;
 catppuccin.fuzzel.accent = "teal";
 
 
+programs.imv.enable = true;
+catppuccin.imv.enable = true;
+
 # programs.anki.enable = true;
 # catppuccin.anki.enable = true;
 }

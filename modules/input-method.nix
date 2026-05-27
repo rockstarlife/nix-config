@@ -14,36 +14,37 @@
         fcitx5-gtk
         fcitx5-rime
         rime-data
-        # qt6Packages.fcitx5-chinese-addons
+        qt6Packages.fcitx5-chinese-addons
         # qt6Packages.fcitx5-configtool   # если нужен GUI
       ];
 #rime
-settings = {
+# settings = {
+#         inputMethod = {
+#           "Groups/0" = {
+#             Name = "Default";
+#             "Default Layout" = "us";
+#             DefaultIM = "rime";
+#           };
+#           "Groups/0/Items/0" = { Name = "keyboard-us"; };
+#           "Groups/0/Items/1" = { Name = "keyboard-ru"; };
+#           "Groups/0/Items/2" = { Name = "rime"; };
+#         };
+#       };
+
+      # Декларативный порядок (us/ru + pinyin)
+      settings = {
         inputMethod = {
           "Groups/0" = {
             Name = "Default";
             "Default Layout" = "us";
-            DefaultIM = "rime";
+            DefaultIM = "pinyin";
           };
           "Groups/0/Items/0" = { Name = "keyboard-us"; };
           "Groups/0/Items/1" = { Name = "keyboard-ru"; };
-          "Groups/0/Items/2" = { Name = "rime"; };
+          "Groups/0/Items/2" = { Name = "pinyin"; };
         };
       };
-
-      # Декларативный порядок (us/ru + pinyin)
-      # settings = {
-      #   inputMethod = {
-      #     "Groups/0" = {
-      #       Name = "Default";
-      #       "Default Layout" = "us";
-      #       DefaultIM = "pinyin";
-      #     };
-      #     "Groups/0/Items/0" = { Name = "keyboard-us"; };
-      #     "Groups/0/Items/1" = { Name = "keyboard-ru"; };
-      #     "Groups/0/Items/2" = { Name = "pinyin"; };
-      #   };
-      # };
+     #
     };
   };
 
