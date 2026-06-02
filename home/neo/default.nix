@@ -14,6 +14,21 @@
     # ./openclaw.nix
   ];
 
+home.packages = with pkgs; [
+  qt6.qtwayland          # основной пакет для Qt Wayland
+  qt5.qtwayland          # на всякий случай (Telegram может тянуть Qt5)
+  mesa                   # обязательно для EGL
+  libglvnd
+];
+
+home.sessionVariables = {
+  XDG_CURRENT_DESKTOP = "river";
+  XDG_SESSION_TYPE = "wayland";
+  QT_QPA_PLATFORM = "wayland";           # или "wayland-egl"
+  QT_QPA_PLATFORMTHEME = "qt5ct";        # если используешь qt5ct
+  # QT_QPA_PLATFORM = "wayland;xcb";     # fallback — попробуй потом
+};
+
 catppuccin = {
   enable = true;
   flavor = "latte";

@@ -128,8 +128,8 @@ programs.localsend.enable = true;
     bluetui # bluetooth tui
     wiremix
 # some
-    qemu
-    OVMF
+    # qemu
+    # OVMF
     # virt-viewer  ← закомментируй, если пока не нужен
     transmission_4-gtk
   ];

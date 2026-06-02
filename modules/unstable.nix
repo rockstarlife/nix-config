@@ -8,7 +8,6 @@
     yt-dlp
     koodo-reader
     # anki-bin
-    droidcam
     discord
   ];
 }
