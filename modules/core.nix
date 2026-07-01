@@ -87,8 +87,8 @@ programs.localsend.enable = true;
 #     allowedUDPPorts = [ 8443 ];   # нужно для UDP-режима (рекомендую оставить)
 #   };
 
-# ────────────────────── for qemu ──────────────────────
-# boot.kernelModules = [ "kvm-intel" ];
+# ────────────────────── for nautilus for trash ──────────────────────
+services.gvfs.enable = true;
 
 # ────────────────────── pkgs ──────────────────────
   environment.systemPackages = with pkgs; [
@@ -97,6 +97,7 @@ programs.localsend.enable = true;
     wget
     fastfetch
     btop
+    lm_sensors
     neovim
     tree
     jq
@@ -131,7 +132,14 @@ programs.localsend.enable = true;
     # qemu
     # OVMF
     # virt-viewer  ← закомментируй, если пока не нужен
-    transmission_4-gtk
+    transmission_4-gtk # for torrent
+    inkscape # for raslinovka
+    # usb flash
+    exfatprogs
+    dosfstools
+    parted
+
+    ncdu #disk usage
   ];
 
 # ────────────────────── boot ──────────────────────

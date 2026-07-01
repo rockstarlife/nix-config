@@ -13,6 +13,7 @@
     # ../../modules/cachyos.nix
     ../../modules/input-method.nix
     ../../modules/languages.nix
+    # ../../modules/stable.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

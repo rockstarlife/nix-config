@@ -193,6 +193,8 @@ rivertile -view-padding 0 -outer-padding 0 &
 # riverctl keyboard-layout -options "grp:win_space_toggle,compose:ralt" "us,ru"
 # переключение раскладки и доп символы.
 # Прямое переключение (самое надёжное, минимум ошибок)
+riverctl spawn "fcitx5&"
+# riverctl spawn "fcitx5-remote -s keyboard-us&"  fcitx5&                 # → английский
 riverctl map normal Alt F spawn "fcitx5-remote -s keyboard-us&" # → английский
 riverctl map normal Alt D spawn "fcitx5-remote -s keyboard-ru&" # → русский
 # riverctl map normal Alt S spawn "fcitx5-remote -s rime&"        # → китайский
@@ -245,7 +247,8 @@ riverctl map normal Alt Return spawn fuzzel
 # ────────────────────── Kanshi ──────────────────────
 # riverctl spawn "kanshi -c ~/.config/kanshi/config"
 # riverctl spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main-rotated"
-riverctl spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main"
+# riverctl spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main"
+riverctl spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main-no-scale"
 
 riverctl map normal Alt+Shift 9 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config"
 riverctl map normal Alt+Shift 8 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/config-main"
@@ -260,15 +263,8 @@ riverctl map normal Alt+Shift 3 spawn "pkill kanshi; kanshi -c ~/.config/kanshi/
 # riverctl spawn "swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/cover-Macroblank-死のダンス-upscaled.png -m fit --color 000000 &"
 # riverctl spawn "swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/cover-Macroblank-死のダンス-upscaled.png -m fit --color 000000 &"
 
-# riverctl spawn "swaybg -o HDMI-A-1 -i /home/neo/Pictures/offline-wallpapers/turquoise-butterfly.jpg -m fit --color 000000 &"
-# riverctl spawn "swaybg -o eDP-1 -i /home/neo/Pictures/offline-wallpapers/turquoise-butterfly.jpg -m fit --color 000000 &"
-
-# riverctl spawn "swaybg -i /home/neo/Pictures/offline-wallpapers/turquoise-butterfly.jpg -m fit --color 000000 &"
-riverctl spawn "swaybg -i /home/neo/Pictures/offline-wallpapers/violet-butterfly.jpg -m fit --color 000000 &"
-
-# riverctl spawn "swaybg -i /home/neo/Pictures/offline-wallpapers/violet-butterfly.jpg -m fit --color 000000 &"
-#
 # riverctl spawn "swaybg -i /home/neo/Pictures/offline-wallpapers/sunset-butterfly.jpg -m fit --color 000000 &"
+riverctl spawn "swaybg -i /home/neo/Pictures/offline-wallpapers/cover-Macroblank-死のダンス-upscaled.png -m fit --color 000000 &"
 
 # ────────────────────── Screenshots ──────────────────────
 # Alt+1 → выбранная область
@@ -335,6 +331,9 @@ riverctl map normal Super+Mod1 S spawn "systemctl suspend"
 riverctl map normal Control+Super 1 spawn "bluetoothctl connect E8:EE:CC:F7:AF:26"
 riverctl map normal Control+Super 2 spawn "bluetoothctl disconnect E8:EE:CC:F7:AF:26"
 
+riverctl map normal Control+Super 3 spawn "bluetoothctl connect 2C:FD:B4:66:AF:FF"
+riverctl map normal Control+Super 4 spawn "bluetoothctl disconnect 2C:FD:B4:66:AF:FF"
+
 # ────────────────────── Mouse ──────────────────────
 # Чувствительность -1 - 1 такие значения можно задавать.
 # riverctl input pointer-1133-45098-Logitech_Signature_M650 pointer-accel -0.2 # от -1.0 до 1.0
@@ -342,7 +341,7 @@ riverctl input pointer-1133-45098-Logitech_Signature_M650 pointer-accel -0.65
 riverctl input pointer-1133-45098-Logitech_Signature_M650 accel-profile flat
 riverctl input pointer-1133-45098-Logitech_Signature_M650 scroll-factor 0.7 # 0.1–2.0, меньше — медленнее
 #usb mouse
-riverctl input pointer-1133-50504-Logitech_USB_Receiver_Mouse pointer-accel -0.4
+riverctl input pointer-1133-50504-Logitech_USB_Receiver_Mouse pointer-accel -0.65
 riverctl input pointer-1133-50504-Logitech_USB_Receiver_Mouse accel-profile flat # курсор без ускорения, ползно для точной работы мышью.
 riverctl input pointer-1133-50504-Logitech_USB_Receiver_Mouse scroll-factor 0.7  # 0.1–2.0, меньше — медленнее
 
@@ -365,18 +364,20 @@ riverctl hide-cursor timeout 3000
 # riverctl hide-cursor timeout 10000
 # Babita theme size can be 16 20 22 24 28 32 40 48 56 64 72 80 88 96
 # riverctl xcursor-theme "Bibata-Modern-Classic" 24
-riverctl xcursor-theme "catppuccin-mocha-dark-cursors" 24
+# riverctl xcursor-theme "catppuccin-mocha-dark-cursors" 24
+riverctl xcursor-theme "catppuccin-mocha-dark-cursors" 28
+
 # ────────────────────── for Gnome look Nautilus ──────────────────────
 riverctl spawn '/usr/lib/xdg-desktop-portal-gtk -r'
 riverctl spawn '/usr/lib/xdg-desktop-portal -r'
 riverctl spawn '/usr/lib/xdg-desktop-portal-wlr -r'
 
 # ────────────────────── Eww ──────────────────────
-riverctl spawn 'eww daemon'
+# riverctl spawn 'eww daemon'
 # riverctl map normal Super+Alt Space spawn 'sh -c "~/.config/eww/time"'
-riverctl map normal Super Tab spawn 'sh -c "~/.config/eww/time"'
+# riverctl map normal Super Tab spawn 'sh -c "~/.config/eww/time"'
 
-riverctl map normal Super+Shift Tab spawn "pkill eww"
+# riverctl map normal Super+Shift Tab spawn "pkill eww"
 
 # ────────────────────── for NixOs ──────────────────────
 # for fast apps launch dbus
